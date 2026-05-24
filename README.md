@@ -62,7 +62,7 @@ Built with MERN Stack + AI integration + cinematic UI.
 # 🚀 Live Demo
 
 Frontend:
-https://your-vercel-link.vercel.app
+https://ravenoir-dvknz1jbo-vineet-s-projects17.vercel.app
 
 Backend:
 https://ravenoir.onrender.com
