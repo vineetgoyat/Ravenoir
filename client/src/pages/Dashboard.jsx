@@ -6,6 +6,8 @@ import {
   FaPlus,
   FaFeatherAlt,
   FaRobot,
+  FaSearch,
+  FaLock,
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
@@ -18,10 +20,9 @@ import {
 
 import MemoryCard from "../components/MemoryCard";
 
-
-
 function Dashboard() {
 
+  const navigate = useNavigate();
 
   const [memories, setMemories] =
     useState([]);
@@ -37,7 +38,7 @@ function Dashboard() {
 
 
 
-  // ================= FORM DATA =================
+  // ================= FORM =================
   const [formData, setFormData] =
     useState({
 
@@ -116,6 +117,7 @@ function Dashboard() {
             .map((tag) =>
               tag.trim()
             )
+            .filter(Boolean)
 
         )
       );
@@ -189,14 +191,6 @@ function Dashboard() {
 
 
 
-  // ================= LOGOUT =================
-   <button
-      className="mt-20 px-5 py-3 rounded-xl bg-red-900 hover:bg-red-800 transition"
-   >
-      Ravenoir Demo
-   </button>
-
-
   // ================= HANDLE INPUT =================
   const handleChange = (e) => {
 
@@ -222,7 +216,7 @@ function Dashboard() {
 
 
 
-  // ================= FILTER MEMORIES =================
+  // ================= FILTER =================
   const filteredMemories =
     memories.filter(
 
@@ -268,44 +262,78 @@ function Dashboard() {
 
 
       {/* SIDEBAR */}
-      <div className="lg:w-[280px] border-r border-white/10 p-8 hidden lg:block">
+      <div className="w-[280px] border-r border-white/10 p-8 hidden lg:flex flex-col justify-between">
 
-        <h1
-          className="text-4xl font-bold mb-16"
-          style={{
-            fontFamily: "Cinzel",
-          }}
-        >
-          Ravenoir
-        </h1>
+        <div>
 
+          {/* LOGO */}
+          <div>
 
+            <h1
+              className="text-4xl font-bold mb-3"
+              style={{
+                fontFamily: "Cinzel",
+              }}
+            >
+              Ravenoir
+            </h1>
 
-        <div className="space-y-6 text-gray-400">
+            <p className="text-gray-500 text-sm leading-relaxed">
 
-          {/* VAULT */}
-          <div className="flex items-center gap-3 text-white">
+              Your cinematic AI memory vault.
 
-            <FaFeatherAlt />
-
-            <span>Vault</span>
+            </p>
 
           </div>
 
 
 
-          {/* AI */}
-          <div
-            onClick={() =>
-              navigate("/raven-ai")
-            }
+          {/* NAVIGATION */}
+          <div className="mt-16 space-y-6 text-gray-400">
 
-            className="flex items-center gap-3 hover:text-white cursor-pointer transition"
-          >
+            {/* VAULT */}
+            <div className="flex items-center gap-4 text-white bg-white/5 px-4 py-3 rounded-2xl">
 
-            <FaRobot />
+              <FaFeatherAlt />
 
-            <span>Raven AI</span>
+              <span>
+                Memory Vault
+              </span>
+
+            </div>
+
+
+
+            {/* AI */}
+            <div
+
+              onClick={() =>
+                navigate("/raven-ai")
+              }
+
+              className="flex items-center gap-4 hover:text-white cursor-pointer transition px-4 py-3 rounded-2xl hover:bg-white/5"
+            >
+
+              <FaRobot />
+
+              <span>
+                Raven AI
+              </span>
+
+            </div>
+
+
+
+            {/* SECRET */}
+            <div className="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-white/5 transition cursor-pointer">
+
+              <FaLock />
+
+              <span>
+                Secret Vault
+              </span>
+
+            </div>
 
           </div>
 
@@ -313,38 +341,94 @@ function Dashboard() {
 
 
 
-        {/* LOGOUT */}
-        <button
-          onClick={handleLogout}
-          className="mt-20 px-5 py-3 rounded-xl bg-red-900 hover:bg-red-800 transition"
-        >
-          Logout
-        </button>
+        {/* DEMO BADGE */}
+        <div className="bg-red-950/30 border border-red-900/20 rounded-3xl p-5">
+
+          <h2 className="text-xl font-bold mb-2">
+
+            Ravenoir Demo
+
+          </h2>
+
+          <p className="text-gray-400 text-sm leading-relaxed">
+
+            Built with MERN Stack, AI integration,
+            image uploads, secret vault system,
+            and cinematic UI design.
+
+          </p>
+
+        </div>
 
       </div>
 
 
 
-      {/* MAIN CONTENT */}
-      <div className="flex-1 p-4 md:p-8">
+      {/* MAIN */}
+      <div className="flex-1 p-4 md:p-8 overflow-hidden">
 
         {/* TOP */}
-        <div className="mb-12">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
 
-          <h2
-            className="text-3xl md:text-5xl font-bold"
-            style={{
-              fontFamily: "Cinzel",
-            }}
-          >
-            Memory Vault 🩸
-          </h2>
+          <div>
 
-          <p className="text-gray-400 mt-3">
+            <h2
+              className="text-4xl md:text-6xl font-bold"
+              style={{
+                fontFamily: "Cinzel",
+              }}
+            >
+              Memory Vault 🩸
+            </h2>
 
-            Preserve your thoughts forever.
+            <p className="text-gray-400 mt-4 text-lg">
 
-          </p>
+              Preserve your thoughts forever inside Ravenoir.
+
+            </p>
+
+          </div>
+
+
+
+          {/* STATS */}
+          <div className="flex gap-4">
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4">
+
+              <p className="text-gray-500 text-sm">
+                Total Memories
+              </p>
+
+              <h3 className="text-3xl font-bold mt-1">
+
+                {memories.length}
+
+              </h3>
+
+            </div>
+
+
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4">
+
+              <p className="text-gray-500 text-sm">
+                Secret Vaults
+              </p>
+
+              <h3 className="text-3xl font-bold mt-1">
+
+                {
+                  memories.filter(
+                    (m) => m.isSecret
+                  ).length
+                }
+
+              </h3>
+
+            </div>
+
+          </div>
 
         </div>
 
@@ -356,7 +440,7 @@ function Dashboard() {
           className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl mb-12"
         >
 
-          <h3 className="text-2xl mb-6 flex items-center gap-3">
+          <h3 className="text-3xl font-bold mb-8 flex items-center gap-4">
 
             <FaPlus />
 
@@ -373,7 +457,7 @@ function Dashboard() {
             placeholder="Memory Title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full p-4 rounded-xl bg-black/30 border border-white/10 outline-none mb-5"
+            className="w-full p-5 rounded-2xl bg-black/30 border border-white/10 outline-none mb-5"
           />
 
 
@@ -383,7 +467,7 @@ function Dashboard() {
             name="mood"
             value={formData.mood}
             onChange={handleChange}
-            className="w-full p-4 rounded-xl bg-black/30 border border-white/10 outline-none mb-5"
+            className="w-full p-5 rounded-2xl bg-black/30 border border-white/10 outline-none mb-5"
           >
 
             <option>
@@ -414,10 +498,10 @@ function Dashboard() {
           <input
             type="text"
             name="tags"
-            placeholder="Tags separated by commas"
+            placeholder="dreams, future, darkness..."
             value={formData.tags}
             onChange={handleChange}
-            className="w-full p-4 rounded-xl bg-black/30 border border-white/10 outline-none mb-5"
+            className="w-full p-5 rounded-2xl bg-black/30 border border-white/10 outline-none mb-5"
           />
 
 
@@ -426,10 +510,10 @@ function Dashboard() {
           <textarea
             name="content"
             placeholder="Write your memory..."
-            rows="5"
+            rows="6"
             value={formData.content}
             onChange={handleChange}
-            className="w-full p-4 rounded-xl bg-black/30 border border-white/10 outline-none mb-5"
+            className="w-full p-5 rounded-2xl bg-black/30 border border-white/10 outline-none mb-5 resize-none"
           />
 
 
@@ -443,17 +527,16 @@ function Dashboard() {
                 e.target.files[0]
               )
             }
-            className="w-full p-4 rounded-xl bg-black/30 border border-white/10 outline-none mb-5"
+            className="w-full p-5 rounded-2xl bg-black/30 border border-white/10 outline-none mb-5"
           />
 
 
 
-          {/* SECRET TOGGLE */}
-          <label className="flex items-center gap-3 mb-5 text-gray-300">
+          {/* SECRET */}
+          <label className="flex items-center gap-3 mb-6 text-gray-300">
 
             <input
               type="checkbox"
-              name="isSecret"
               checked={
                 formData.isSecret
               }
@@ -472,16 +555,16 @@ function Dashboard() {
               }
             />
 
-            Store In Secret Vault 👁️
+            Store Inside Secret Vault 👁️
 
           </label>
 
 
 
-          {/* BUTTON */}
+          {/* SUBMIT */}
           <button
             type="submit"
-            className="mt-3 px-8 py-4 rounded-xl bg-red-900 hover:bg-red-800 transition"
+            className="px-8 py-4 rounded-2xl bg-red-900 hover:bg-red-800 transition text-lg font-semibold shadow-xl shadow-red-950/30"
           >
 
             Save Memory
@@ -493,26 +576,32 @@ function Dashboard() {
 
 
         {/* SEARCH */}
-        <input
-          type="text"
-          placeholder="Search memories..."
-          value={searchTerm}
+        <div className="relative mb-10">
 
-          onChange={(e) =>
-            setSearchTerm(
-              e.target.value
-            )
-          }
+          <FaSearch className="absolute top-1/2 left-5 -translate-y-1/2 text-gray-500" />
 
-          className="w-full mb-10 p-4 rounded-2xl bg-white/5 border border-white/10 outline-none"
-        />
+          <input
+            type="text"
+            placeholder="Search memories..."
+            value={searchTerm}
+
+            onChange={(e) =>
+              setSearchTerm(
+                e.target.value
+              )
+            }
+
+            className="w-full pl-14 p-5 rounded-2xl bg-white/5 border border-white/10 outline-none"
+          />
+
+        </div>
 
 
 
-        {/* MEMORY GRID */}
+        {/* MEMORIES */}
         {loading ? (
 
-          <div className="text-center text-gray-500 text-xl mt-20">
+          <div className="text-center text-gray-500 text-2xl mt-20">
 
             Entering The Vault...
 
@@ -522,21 +611,22 @@ function Dashboard() {
 
           <div className="flex flex-col items-center justify-center mt-24 text-center">
 
-            <div className="text-7xl mb-6">
+            <div className="text-8xl mb-6">
 
               🪶
 
             </div>
 
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-4">
 
               The Vault Is Empty
 
             </h2>
 
-            <p className="text-gray-500 max-w-md">
+            <p className="text-gray-500 max-w-lg text-lg leading-relaxed">
 
               Your memories have not yet been carved into Ravenoir.
+              Create your first cinematic memory now.
 
             </p>
 

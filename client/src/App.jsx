@@ -4,36 +4,23 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import RavenEye from "./components/RavenEye";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Particles from "./components/Particles";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
 import RavenAI from "./pages/RavenAI";
-
-
+import Dashboard from "./pages/Dashboard";
 
 function HomePage() {
 
   return (
     <>
-
       <RavenEye />
-
       <Navbar />
-
       <Hero />
-
       <Features />
-
       <Particles />
-
     </>
   );
 }
-
-
 
 function App() {
 
@@ -43,49 +30,19 @@ function App() {
 
       <Routes>
 
-        {/* HOME */}
         <Route
           path="/"
           element={<HomePage />}
         />
 
-
-
-        {/* LOGIN */}
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-
-
-        {/* REGISTER */}
-        <Route
-          path="/register"
-          element={<Register />}
-        />
-
-
-
-        {/* DASHBOARD */}
         <Route
           path="/dashboard"
-          element={
-              <Dashboard />
-          }
+          element={<Dashboard />}
         />
 
-
-
-        {/* RAVEN AI */}
         <Route
           path="/raven-ai"
-          element={
-            
-
-              <RavenAI />
-
-          }
+          element={<RavenAI />}
         />
 
       </Routes>
