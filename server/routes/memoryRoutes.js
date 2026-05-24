@@ -8,8 +8,6 @@ const {
   deleteMemory,
 } = require("../controllers/memoryController");
 
-const protect = require("../middleware/authMiddleware");
-
 const router = express.Router();
 
 
@@ -17,17 +15,15 @@ const router = express.Router();
 // ================= CREATE MEMORY =================
 router.post(
   "/",
-  protect,
   upload.single("image"),
   createMemory
 );
 
 
 
-// ================= GET ALL MEMORIES =================
+// ================= GET MEMORIES =================
 router.get(
   "/",
-  protect,
   getMemories
 );
 
@@ -36,7 +32,6 @@ router.get(
 // ================= DELETE MEMORY =================
 router.delete(
   "/:id",
-  protect,
   deleteMemory
 );
 

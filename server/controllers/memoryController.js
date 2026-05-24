@@ -8,7 +8,10 @@ const createMemory = async (req, res) => {
   try {
 
     console.log("BODY => ", req.body);
+
     console.log("FILE => ", req.file);
+
+
 
     const {
       title,
@@ -24,7 +27,9 @@ const createMemory = async (req, res) => {
     if (!title || !content) {
 
       return res.status(400).json({
-        message: "Title and content are required",
+        success: false,
+        message:
+          "Title and content are required",
       });
     }
 
@@ -52,41 +57,53 @@ const createMemory = async (req, res) => {
 
 
     // ================= CREATE MEMORY =================
-    const memory = await Memory.create({
+    const memory =
+      await Memory.create({
 
-      title,
+        title,
 
-      content,
+        content,
 
-      mood,
+        mood,
 
-      tags: parsedTags,
+        tags: parsedTags,
 
-      image,
+        image,
 
-      isSecret:
-        isSecret === "true",
+        isSecret:
+          isSecret === "true",
 
-      user: req.user,
-
-    });
+      });
 
 
 
     res.status(201).json({
+
       success: true,
-      message: "Memory created successfully",
+
+      message:
+        "Memory created successfully",
+
       memory,
+
     });
 
   } catch (error) {
 
-    console.log("CREATE MEMORY ERROR => ", error);
+    console.log(
+      "CREATE MEMORY ERROR => ",
+      error
+    );
 
     res.status(500).json({
+
       success: false,
-      message: "Failed to create memory",
+
+      message:
+        "Failed to create memory",
+
       error: error.message,
+
     });
   }
 };
@@ -98,28 +115,41 @@ const getMemories = async (req, res) => {
 
   try {
 
-    const memories = await Memory.find({
-      user: req.user,
-    }).sort({
-      createdAt: -1,
-    });
+    const memories =
+      await Memory.find()
+
+        .sort({
+          createdAt: -1,
+        });
 
 
 
     res.status(200).json({
+
       success: true,
+
       count: memories.length,
+
       memories,
+
     });
 
   } catch (error) {
 
-    console.log("GET MEMORIES ERROR => ", error);
+    console.log(
+      "GET MEMORIES ERROR => ",
+      error
+    );
 
     res.status(500).json({
+
       success: false,
-      message: "Failed to fetch memories",
+
+      message:
+        "Failed to fetch memories",
+
       error: error.message,
+
     });
   }
 };
@@ -142,22 +172,12 @@ const deleteMemory = async (req, res) => {
     if (!memory) {
 
       return res.status(404).json({
+
         success: false,
-        message: "Memory not found",
-      });
-    }
 
+        message:
+          "Memory not found",
 
-
-    // ================= CHECK OWNER =================
-    if (
-      memory.user.toString() !==
-      req.user.toString()
-    ) {
-
-      return res.status(401).json({
-        success: false,
-        message: "Not authorized",
       });
     }
 
@@ -168,18 +188,30 @@ const deleteMemory = async (req, res) => {
 
 
     res.status(200).json({
+
       success: true,
-      message: "Memory deleted successfully",
+
+      message:
+        "Memory deleted successfully",
+
     });
 
   } catch (error) {
 
-    console.log("DELETE MEMORY ERROR => ", error);
+    console.log(
+      "DELETE MEMORY ERROR => ",
+      error
+    );
 
     res.status(500).json({
+
       success: false,
-      message: "Failed to delete memory",
+
+      message:
+        "Failed to delete memory",
+
       error: error.message,
+
     });
   }
 };
