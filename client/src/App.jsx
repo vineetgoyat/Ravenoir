@@ -6,11 +6,10 @@ import Features from "./components/Features";
 import RavenEye from "./components/RavenEye";
 import Particles from "./components/Particles";
 
-import RavenAI from "./pages/RavenAI";
 import Dashboard from "./pages/Dashboard";
+import RavenAI from "./pages/RavenAI";
 
 function HomePage() {
-
   return (
     <>
       <RavenEye />
@@ -23,23 +22,24 @@ function HomePage() {
 }
 
 function App() {
-
   return (
-
     <div className="bg-[#0D0D0D] text-white min-h-screen overflow-hidden">
 
       <Routes>
 
+        {/* LANDING */}
         <Route
           path="/"
           element={<HomePage />}
         />
 
+        {/* DEMO DASHBOARD */}
         <Route
           path="/dashboard"
           element={<Dashboard />}
         />
 
+        {/* AI */}
         <Route
           path="/raven-ai"
           element={<RavenAI />}

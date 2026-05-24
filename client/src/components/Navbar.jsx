@@ -1,57 +1,57 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Navbar() {
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="w-full px-10 py-6 flex items-center justify-between border-b border-white/10 backdrop-blur-md"
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/20 border-b border-white/10"
     >
 
-      {/* LOGO */}
-      <Link to="/">
-        <h1
-          className="text-3xl font-bold tracking-widest cursor-pointer"
-          style={{ fontFamily: "Cinzel" }}
-        >
-          Ravenoir
-        </h1>
-      </Link>
+      <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
-      {/* NAV LINKS */}
-      <div className="hidden md:flex gap-10 text-sm text-gray-300">
-
-        <Link
-          to="/"
-          className="hover:text-white transition"
-        >
-          Features
+        <Link to="/">
+          <h1
+            className="text-3xl font-bold"
+            style={{ fontFamily: "Cinzel" }}
+          >
+            Ravenoir
+          </h1>
         </Link>
+
+
+        <div className="hidden md:flex gap-8 text-gray-300">
+
+          <a href="#features" className="hover:text-white transition">
+            Features
+          </a>
+
+          <Link
+            to="/dashboard"
+            className="hover:text-white transition"
+          >
+            Vault
+          </Link>
+
+          <Link
+            to="/raven-ai"
+            className="hover:text-white transition"
+          >
+            Raven AI
+          </Link>
+
+        </div>
+
 
         <Link
           to="/dashboard"
-          className="hover:text-white transition"
+          className="px-6 py-3 rounded-full bg-red-900 hover:bg-red-800 transition-all duration-300 hover:scale-105"
         >
-          Vault
-        </Link>
-
-        <Link
-          to="/register"
-          className="hover:text-white transition"
-        >
-          About
+          Enter Vault
         </Link>
 
       </div>
-
-      {/* BUTTON */}
-      <Link to="/login">
-        <button className="px-5 py-2 rounded-full bg-red-900 hover:bg-red-800 transition shadow-lg shadow-red-950">
-          Enter Vault
-        </button>
-      </Link>
 
     </motion.nav>
   );

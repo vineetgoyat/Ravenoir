@@ -82,7 +82,7 @@ function MemoryCard({
         scale: 1.02,
       }}
 
-      className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:border-red-900/40 hover:shadow-2xl hover:shadow-red-950/30 transition duration-300"
+      className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:border-red-900/40 hover:shadow-2xl hover:shadow-red-950/30 transition-all duration-300 hover:scale-[1.02]"
     >
 
 

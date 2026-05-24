@@ -7,7 +7,7 @@ function Hero() {
 
   return (
 
-    <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+    <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-36 relative overflow-hidden">
 
       {/* BACKGROUND EFFECTS */}
 
@@ -197,7 +197,7 @@ function Hero() {
 
         {/* CARD 1 */}
 
-        <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:border-red-900/40 transition">
+        <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl hover:border-red-900/40 transition-all duration-300 hover:scale-[1.02]">
 
           <div className="text-5xl mb-5">
             👁️
