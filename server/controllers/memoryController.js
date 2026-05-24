@@ -7,6 +7,9 @@ const createMemory = async (req, res) => {
 
   try {
 
+    console.log("BODY => ", req.body);
+    console.log("FILE => ", req.file);
+
     const {
       title,
       content,
@@ -15,18 +18,44 @@ const createMemory = async (req, res) => {
       isSecret,
     } = req.body;
 
-    // IMAGE FROM CLOUDINARY
+
+
+    // ================= VALIDATION =================
+    if (!title || !content) {
+
+      return res.status(400).json({
+        message: "Title and content are required",
+      });
+    }
+
+
+
+    // ================= IMAGE =================
     const image =
       req.file?.path || "";
 
-    // PARSE TAGS
-    const parsedTags =
-      tags ? JSON.parse(tags) : [];
 
-    // CREATE MEMORY
+
+    // ================= TAGS =================
+    let parsedTags = [];
+
+    try {
+
+      parsedTags =
+        tags ? JSON.parse(tags) : [];
+
+    } catch (error) {
+
+      parsedTags = [];
+    }
+
+
+
+    // ================= CREATE MEMORY =================
     const memory = await Memory.create({
 
       title,
+
       content,
 
       mood,
@@ -42,14 +71,22 @@ const createMemory = async (req, res) => {
 
     });
 
-    res.status(201).json(memory);
+
+
+    res.status(201).json({
+      success: true,
+      message: "Memory created successfully",
+      memory,
+    });
 
   } catch (error) {
 
-    console.log(error);
+    console.log("CREATE MEMORY ERROR => ", error);
 
     res.status(500).json({
+      success: false,
       message: "Failed to create memory",
+      error: error.message,
     });
   }
 };
@@ -67,14 +104,22 @@ const getMemories = async (req, res) => {
       createdAt: -1,
     });
 
-    res.status(200).json(memories);
+
+
+    res.status(200).json({
+      success: true,
+      count: memories.length,
+      memories,
+    });
 
   } catch (error) {
 
-    console.log(error);
+    console.log("GET MEMORIES ERROR => ", error);
 
     res.status(500).json({
+      success: false,
       message: "Failed to fetch memories",
+      error: error.message,
     });
   }
 };
@@ -86,41 +131,55 @@ const deleteMemory = async (req, res) => {
 
   try {
 
-    const memory = await Memory.findById(
-      req.params.id
-    );
+    const memory =
+      await Memory.findById(
+        req.params.id
+      );
 
-    // CHECK MEMORY EXISTS
+
+
+    // ================= CHECK EXISTS =================
     if (!memory) {
 
       return res.status(404).json({
+        success: false,
         message: "Memory not found",
       });
     }
 
-    // CHECK OWNER
+
+
+    // ================= CHECK OWNER =================
     if (
       memory.user.toString() !==
       req.user.toString()
     ) {
 
       return res.status(401).json({
+        success: false,
         message: "Not authorized",
       });
     }
 
+
+
     await memory.deleteOne();
 
+
+
     res.status(200).json({
-      message: "Memory deleted",
+      success: true,
+      message: "Memory deleted successfully",
     });
 
   } catch (error) {
 
-    console.log(error);
+    console.log("DELETE MEMORY ERROR => ", error);
 
     res.status(500).json({
+      success: false,
       message: "Failed to delete memory",
+      error: error.message,
     });
   }
 };

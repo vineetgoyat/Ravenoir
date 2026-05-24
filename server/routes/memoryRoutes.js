@@ -1,4 +1,5 @@
 const express = require("express");
+
 const upload = require("../middleware/uploadMiddleware");
 
 const {
@@ -11,15 +12,34 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+
+
+// ================= CREATE MEMORY =================
 router.post(
-    "/",
-    protect,
-    upload.single("image"),
-    createMemory
+  "/",
+  protect,
+  upload.single("image"),
+  createMemory
 );
 
-router.get("/", protect, getMemories);
 
-router.delete("/:id", protect, deleteMemory);
+
+// ================= GET ALL MEMORIES =================
+router.get(
+  "/",
+  protect,
+  getMemories
+);
+
+
+
+// ================= DELETE MEMORY =================
+router.delete(
+  "/:id",
+  protect,
+  deleteMemory
+);
+
+
 
 module.exports = router;
