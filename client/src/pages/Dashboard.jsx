@@ -22,7 +22,6 @@ import MemoryCard from "../components/MemoryCard";
 
 function Dashboard() {
 
-  const navigate = useNavigate();
 
   const [memories, setMemories] =
     useState([]);
@@ -191,15 +190,11 @@ function Dashboard() {
 
 
   // ================= LOGOUT =================
-  const handleLogout = () => {
-
-    localStorage.removeItem(
-      "token"
-    );
-
-    navigate("/login");
-  };
-
+   <button
+      className="mt-20 px-5 py-3 rounded-xl bg-red-900 hover:bg-red-800 transition"
+   >
+      Ravenoir Demo
+   </button>
 
 
   // ================= HANDLE INPUT =================

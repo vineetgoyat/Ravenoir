@@ -71,11 +71,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
-
               <Dashboard />
-
-            </ProtectedRoute>
           }
         />
 
@@ -85,11 +81,10 @@ function App() {
         <Route
           path="/raven-ai"
           element={
-            <ProtectedRoute>
+            
 
               <RavenAI />
 
-            </ProtectedRoute>
           }
         />
 
