@@ -8,6 +8,7 @@ import {
   FaRobot,
   FaSearch,
   FaLock,
+  FaHome,
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
@@ -20,9 +21,13 @@ import {
 
 import MemoryCard from "../components/MemoryCard";
 
+
+
 function Dashboard() {
 
   const navigate = useNavigate();
+
+
 
   const [memories, setMemories] =
     useState([]);
@@ -107,6 +112,8 @@ function Dashboard() {
         formData.mood
       );
 
+
+
       memoryData.append(
         "tags",
 
@@ -121,6 +128,8 @@ function Dashboard() {
 
         )
       );
+
+
 
       memoryData.append(
         "isSecret",
@@ -256,18 +265,50 @@ function Dashboard() {
         duration: 0.5,
       }}
 
-      className="min-h-screen bg-[#0D0D0D] text-white flex"
+      className="min-h-screen bg-[#0D0D0D] text-white flex flex-col lg:flex-row"
     >
 
 
 
       {/* SIDEBAR */}
-      <div className="w-[280px] border-r border-white/10 p-8 hidden lg:flex flex-col justify-between">
+      <div className="w-full lg:w-[280px] border-b lg:border-b-0 lg:border-r border-white/10 p-5 lg:p-8 lg:flex lg:flex-col lg:justify-between">
 
         <div>
 
-          {/* LOGO */}
-          <div>
+          {/* MOBILE TOP */}
+          <div className="flex lg:hidden items-center justify-between mb-8">
+
+            <h1
+              className="text-3xl font-bold"
+              style={{
+                fontFamily: "Cinzel",
+              }}
+            >
+              Ravenoir
+            </h1>
+
+
+
+            <button
+              onClick={() =>
+                navigate("/raven-ai")
+              }
+
+              className="px-4 py-2 rounded-xl bg-red-900 hover:bg-red-800 transition flex items-center gap-2"
+            >
+
+              <FaRobot />
+
+              AI
+
+            </button>
+
+          </div>
+
+
+
+          {/* DESKTOP LOGO */}
+          <div className="hidden lg:block">
 
             <h1
               className="text-4xl font-bold mb-3"
@@ -289,10 +330,10 @@ function Dashboard() {
 
 
           {/* NAVIGATION */}
-          <div className="mt-16 space-y-6 text-gray-400">
+          <div className="mt-10 lg:mt-16 space-y-6 text-gray-400 hidden lg:block">
 
             {/* VAULT */}
-            <div className="flex items-center gap-4 text-white bg-white/5 px-4 py-3 rounded-2xl">
+            <div className="flex items-center gap-4 text-white bg-white/5 px-4 py-3 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
 
               <FaFeatherAlt />
 
@@ -311,7 +352,7 @@ function Dashboard() {
                 navigate("/raven-ai")
               }
 
-              className="flex items-center gap-4 hover:text-white cursor-pointer transition px-4 py-3 rounded-2xl hover:bg-white/5"
+              className="flex items-center gap-4 hover:text-white cursor-pointer transition px-4 py-3 rounded-2xl hover:bg-white/5 hover:scale-[1.02]"
             >
 
               <FaRobot />
@@ -325,7 +366,7 @@ function Dashboard() {
 
 
             {/* SECRET */}
-            <div className="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-white/5 transition cursor-pointer">
+            <div className="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-white/5 transition cursor-pointer hover:scale-[1.02]">
 
               <FaLock />
 
@@ -342,7 +383,7 @@ function Dashboard() {
 
 
         {/* DEMO BADGE */}
-        <div className="bg-red-950/30 border border-red-900/20 rounded-3xl p-5">
+        <div className="hidden lg:block bg-red-950/30 border border-red-900/20 rounded-3xl p-5 mt-10 transition-all duration-300 hover:scale-[1.02]">
 
           <h2 className="text-xl font-bold mb-2">
 
@@ -365,10 +406,10 @@ function Dashboard() {
 
 
       {/* MAIN */}
-      <div className="flex-1 p-4 md:p-8 overflow-hidden">
+      <div className="flex-1 p-4 md:p-8 overflow-hidden pb-32 lg:pb-8">
 
         {/* TOP */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 mb-12">
 
           <div>
 
@@ -392,9 +433,9 @@ function Dashboard() {
 
 
           {/* STATS */}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4">
+            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]">
 
               <p className="text-gray-500 text-sm">
                 Total Memories
@@ -410,7 +451,7 @@ function Dashboard() {
 
 
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4">
+            <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 transition-all duration-300 hover:scale-[1.02]">
 
               <p className="text-gray-500 text-sm">
                 Secret Vaults
@@ -437,10 +478,10 @@ function Dashboard() {
         {/* FORM */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-xl mb-12"
+          className="bg-white/5 border border-white/10 rounded-3xl p-5 md:p-8 backdrop-blur-xl mb-12 transition-all duration-300 hover:scale-[1.01]"
         >
 
-          <h3 className="text-3xl font-bold mb-8 flex items-center gap-4">
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-4">
 
             <FaPlus />
 
@@ -564,7 +605,7 @@ function Dashboard() {
           {/* SUBMIT */}
           <button
             type="submit"
-            className="px-8 py-4 rounded-2xl bg-red-900 hover:bg-red-800 transition text-lg font-semibold shadow-xl shadow-red-950/30"
+            className="px-8 py-4 rounded-2xl bg-red-900 hover:bg-red-800 transition-all duration-300 hover:scale-[1.02] text-lg font-semibold shadow-xl shadow-red-950/30"
           >
 
             Save Memory
@@ -649,6 +690,56 @@ function Dashboard() {
           </div>
 
         )}
+
+      </div>
+
+
+
+      {/* MOBILE NAVBAR */}
+      <div className="fixed bottom-0 left-0 w-full lg:hidden bg-[#111111]/95 border-t border-white/10 backdrop-blur-xl flex justify-around items-center py-4 z-50">
+
+        {/* VAULT */}
+        <button className="flex flex-col items-center text-red-400">
+
+          <FaHome className="text-xl" />
+
+          <span className="text-xs mt-1">
+            Vault
+          </span>
+
+        </button>
+
+
+
+        {/* AI */}
+        <button
+          onClick={() =>
+            navigate("/raven-ai")
+          }
+
+          className="flex flex-col items-center text-gray-400 hover:text-white transition"
+        >
+
+          <FaRobot className="text-xl" />
+
+          <span className="text-xs mt-1">
+            Raven AI
+          </span>
+
+        </button>
+
+
+
+        {/* SECRET */}
+        <button className="flex flex-col items-center text-gray-400 hover:text-white transition">
+
+          <FaLock className="text-xl" />
+
+          <span className="text-xs mt-1">
+            Secret
+          </span>
+
+        </button>
 
       </div>
 
